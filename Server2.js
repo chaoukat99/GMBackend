@@ -218,6 +218,11 @@ Server.post("/files/add-user",(req,res)=>{
 
    const {id,nom,age,profession}=req.body;
 
+//    Validate data 
+
+
+// Traitement
+
    fs.writeFile(`${nom}.txt`,`Id :${id}\nNom:${nom}\nAge:${age}\nProfession:${profession}`,(err)=>{
     if(err){
         res.status(500).json({msg:"Server Error"})
@@ -228,6 +233,127 @@ Server.post("/files/add-user",(req,res)=>{
 
 
 })
+
+
+
+
+
+// PUT PATCH
+
+
+Server.post("/users/add-new-user",(req,res)=>{
+
+const {id , prenom ,age}=req.body;
+
+
+
+// Traitement (insertion des données sur la BD)
+
+
+
+res.status(201).json({msg:"User created successfully"});
+
+
+})
+
+
+
+
+
+// Put 
+
+
+Server.put("/users/edit-user/:id",(req,res)=>{
+
+//    Get User Id
+
+const user_id=req.params.id;
+
+// Chercher l(utilisateur avec id recuperer )
+
+
+const {newValue}=req.body;
+
+// si On trouve utilisateur on va le modifier par le body de la requete
+
+
+
+
+})
+
+
+
+
+
+Server.put("/files/update-filename/:filename",(req,res)=>{
+
+    const filename=req.params.filename;
+
+
+    const {newfilename}=req.body;
+
+
+
+    // traitement de modifier le nom du fichiers 
+
+    fs.rename(`${filename}.txt`,`${newfilename}.txt`,(err)=>{
+        if(err){
+            res.status(404).json({msg:"Unfound file "})
+        }else{
+            res.status(202).json({msg:"Fichier modifié "})
+        }
+    })
+})
+
+
+// Modifier un seul champ sur l'élement 
+Server.patch("/files/update-filename/:filename",(req,res)=>{
+
+    const filename=req.params.filename;
+
+
+    const {newfilename}=req.body;
+
+
+
+    // traitement de modifier le nom du fichiers 
+
+    fs.rename(`${filename}.txt`,`${newfilename}.txt`,(err)=>{
+        if(err){
+            res.status(404).json({msg:"Unfound file "})
+        }else{
+            res.status(202).json({msg:"Fichier modifié "})
+        }
+    })
+})
+
+
+
+
+// Delete 
+
+
+
+Server.delete("/files/delete-file/:filename",(req,res)=>{
+
+
+const filename=req.params.filename;
+
+
+fs.unlink(`${filename}.txt`,(err)=>{
+
+    if(err){
+        res.status(404).json({msg:"Unfound file "})
+    }else{
+        res.status(204).json({msg:"File deleted successfully"});
+    }
+})
+
+
+})
+
+
+
 
 
 
@@ -246,3 +372,21 @@ Server.listen(PORT,()=>{
 
 
 
+
+
+
+// CRUD(CREATE READ UPDATE DELETE )
+
+
+
+// GET /files/read-filecontent/filename en parametre  | res=le contenu du fichier 
+
+// POST /files/create-new-file (texte) | res = fichier créer
+
+
+
+// PUT /file/update-file/fileame(parametre) | essaiyer de modifier le contenu du fichier   | res= fichier modifié 
+
+
+
+// DELETE /file/delete-file/filename(parametre) |  supprimer le ficher avec le nom donner en parametres

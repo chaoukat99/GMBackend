@@ -1,0 +1,15 @@
+// CRUD(CREATE READ UPDATE DELETE )
+
+
+
+// GET /files/read-filecontent/filename en parametre  | res=le contenu du fichier 
+
+// POST /files/create-new-file (texte) | res = fichier créer
+
+
+
+// PUT /file/update-file/fileame(parametre) | essaiyer de modifier le contenu du fichier   | res= fichier modifié 
+
+
+
+// DELETE /file/delete-file/filename(parametre) |  supprimer le ficher avec le nom donner en parametres

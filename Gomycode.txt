@@ -1,6 +1,0 @@
-Nom:Gomycode
-Age:10
-Formation:Web dev
-Pays:France
-Ville:Paris
-type:remote
