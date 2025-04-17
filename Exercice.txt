@@ -1,6 +1,6 @@
 // CRUD(CREATE READ UPDATE DELETE )
 
-
+fetch("http://localhost:3005/files/read-filecontent/")
 
 // GET /files/read-filecontent/filename en parametre  | res=le contenu du fichier 
 
@@ -8,7 +8,7 @@
 
 
 
-// PUT /file/update-file/fileame(parametre) | essaiyer de modifier le contenu du fichier   | res= fichier modifié 
+// PUT /file/update-file/filename(parametre) | essaiyer de modifier le contenu du fichier   | res= fichier modifié 
 
 
 

@@ -359,6 +359,12 @@ fs.unlink(`${filename}.txt`,(err)=>{
 
 
 
+
+
+
+
+
+
 Server.listen(PORT,()=>{
     console.log(" server is running on  http://localhost:"+PORT)
 })
@@ -390,3 +396,16 @@ Server.listen(PORT,()=>{
 
 
 // DELETE /file/delete-file/filename(parametre) |  supprimer le ficher avec le nom donner en parametres
+
+
+
+
+
+fetch("http://localhost:3005/files/add-new-file/Saber/txt",{
+    method:"PATCH",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({
+        new_value:"jhdkzhzdkh"
+    })
+}).then(res=>res.json())
+.then(data=>console.log(data))
