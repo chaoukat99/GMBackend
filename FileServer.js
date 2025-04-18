@@ -16,6 +16,26 @@ app.use(bodyParser.json());
 
 
 
+
+
+const userAge=15;
+
+const AgeMiddleware=(req,res,next)=>{
+    if(userAge>18){
+        next();
+    }else{
+        res.status(403).json({message:"Age Invalid"})
+    }
+
+}
+
+
+
+
+
+app.use("/files",AgeMiddleware);
+
+
 app.get("/",(req,res)=>{
 
 
