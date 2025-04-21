@@ -2,12 +2,16 @@
 
 // const express=require("express"); // commonjs method 
 
- import express from "express"; // 2- importing express framework 
+import express from "express"; // 2- importing express framework 
+
+import {rateLimit} from "express-rate-limit";
 
 import bodyParser from "body-parser";
 
 import fs from "fs";
 
+
+import  cors from "cors"
 
 
 // 3-  Instancier express  (Créer Le serveur )
@@ -17,6 +21,30 @@ const Server=express();
 
 
 Server.use(bodyParser.json())
+
+Server.use(cors({
+    origin:["https://instructors.learn.gomycode.co","https://www.w3schools.com"],
+    methods:['GET','POST']
+}))
+
+
+
+// Rate Limit middleware 
+const limiter = rateLimit({
+	windowMs:  1 * 60 * 1000, // 1 minutes
+	limit: 4, // Limit each IP to 100 requests per `window` (here, per 15 minutes).
+    message:"To many Request wait !",
+	standardHeaders: 'draft-8', // draft-6: `RateLimit-*` headers; draft-7 & draft-8: combined `RateLimit` header
+	legacyHeaders: false, // Disable the `X-RateLimit-*` headers.
+	// store: ... , // Redis, Memcached, etc. See below.
+})
+
+
+
+Server.use(limiter);
+
+
+
 
 const PORT=3000;
 
@@ -401,11 +429,3 @@ Server.listen(PORT,()=>{
 
 
 
-fetch("http://localhost:3005/files/add-new-file/Saber/txt",{
-    method:"PATCH",
-    headers:{"Content-Type":"application/json"},
-    body:JSON.stringify({
-        new_value:"jhdkzhzdkh"
-    })
-}).then(res=>res.json())
-.then(data=>console.log(data))
